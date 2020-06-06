@@ -15,6 +15,10 @@ on:
       - '!server/docs/**'
     branches: [ develop, master ]
 
+defaults:
+  run:
+    working-directory: server
+
 jobs:
   server-job:
     name: Server actions
@@ -22,7 +26,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      working-directory: server
 
     - name: Use Node.js
       uses: actions/setup-node@v1
