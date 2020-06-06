@@ -19,6 +19,7 @@ jobs:
   server-job:
     name: Server actions
     runs-on: ubuntu-latest
+    working-directory: server
 
     steps:
     - uses: actions/checkout@v2
@@ -46,6 +47,9 @@ jobs:
 
     - name: Build
       run: yarn build
+
+    - name: Linting
+      run: yarn lint
 
     - name: Run unit tests
       run: yarn test
