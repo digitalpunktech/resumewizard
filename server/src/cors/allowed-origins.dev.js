@@ -1,1 +1,1 @@
-export default [`https://localhost:${process.env.PORT}`];
+export default [`http://localhost:${process.env.PORT}`];
