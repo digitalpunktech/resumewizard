@@ -54,7 +54,7 @@ const log = info => {
 };
 
 const appLogger = {
-  fatal: ({ message, error = {}, requestId }) => {
+  fatal: ({ message, error = {} }) => {
     const err = {
       message: error.message,
       stack: error.stack,
@@ -63,13 +63,12 @@ const appLogger = {
     };
     log({
       message,
-      requestId,
       error: err,
       levelTag: LEVEL_TAGS.FATAL,
     });
   },
 
-  error: ({ message, error = {}, requestId }) => {
+  error: ({ message, error = {} }) => {
     const err = {
       message: error.message,
       stack: error.stack,
@@ -78,34 +77,30 @@ const appLogger = {
     };
     log({
       message,
-      requestId,
       error: err,
       levelTag: LEVEL_TAGS.ERROR,
     });
   },
 
-  warn: ({ message, requestId }) =>
+  warn: ({ message }) =>
     log({
       message,
-      requestId,
       levelTag: LEVEL_TAGS.WARN,
     }),
 
-  info: ({ message, requestId }) => {
-    log({ message, requestId });
+  info: ({ message }) => {
+    log({ message });
   },
 
-  debug: ({ message, requestId }) =>
+  debug: ({ message }) =>
     log({
       message,
-      requestId,
       levelTag: LEVEL_TAGS.DEBUG,
     }),
 
-  trace: ({ message, requestId }) =>
+  trace: ({ message }) =>
     log({
       message,
-      requestId,
       levelTag: LEVEL_TAGS.TRACE,
     }),
 };

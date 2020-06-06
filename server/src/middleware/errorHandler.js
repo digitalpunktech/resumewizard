@@ -2,48 +2,40 @@ import appLogger from '../logging/appLogger';
 
 const readableMessage = 'A system error occurred.';
 
-const logError = (err, requestId) => {
+const logError = err => {
   appLogger.error({
     message: err.systemMessage || readableMessage,
-    requestId,
     error: err,
   });
 };
 
-const getDecoratedErrorMessage = ({ statusCode, message, requestId }) => {
+const getDecoratedErrorMessage = ({ statusCode, message }) => {
   if (statusCode < 500) return message;
 
-  const trimmedMessage = (message || readableMessage).trim();
-  const endsWithSelectPunctuation = /[.|?|!]$/.test(trimmedMessage);
-  const fullStop = endsWithSelectPunctuation ? '' : '.';
-
-  return `${trimmedMessage}${fullStop} Please try again. If error persists, get in touch with us. Request ID: ${requestId}.`;
+  return (message || readableMessage).trim();
 };
 
-const buildResponse = (err, requestId) => {
+const buildResponse = err => {
   const statusCode = Number(err.statusCode || 500);
   const { message, forbiddenResponseCode, code } = err;
 
   const decoratedMessage = getDecoratedErrorMessage({
     statusCode,
     message,
-    requestId,
   });
 
   return {
     statusCode,
     message: decoratedMessage,
     code,
-    requestId,
     forbiddenResponseCode,
   };
 };
 
 export default (err, req, res, next) => { //eslint-disable-line
-  const { requestId } = res.locals;
-  logError(err, requestId);
+  logError(err);
 
-  const errorResponse = buildResponse(err, requestId);
+  const errorResponse = buildResponse(err);
 
   res.status(errorResponse.statusCode);
   res.json(errorResponse);
