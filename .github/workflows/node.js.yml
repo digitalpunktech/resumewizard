@@ -21,7 +21,7 @@ defaults:
 
 jobs:
   server-job:
-    name: Server actions
+    name: Resume Wizard Server checks
     runs-on: ubuntu-latest
 
     steps:
