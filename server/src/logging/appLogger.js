@@ -36,7 +36,7 @@ const timeStamp = () => ({
 });
 
 const log = info => {
-  const level = LOG_LEVELS[info.levelTag];
+  const level = LOG_LEVELS[info.levelTag] || LOG_LEVELS[DEFAULT_LEVEL_TAG];
   const logInfo = {
     ...defaultLoggerConfig,
     ...timeStamp(),
