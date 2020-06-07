@@ -1,0 +1,55 @@
+name: Digital Punk Resume Wizard GitHub actions for Frontend VueJS app
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+      - '!frontend/docs/**'
+    branches: [ master ]
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - '!frontend/docs/**'
+    branches: [ develop, master ]
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  frontend-job:
+    name: Resume Wizard Frontend checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # npm cache dir on Linux/Mac
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+
+    - name: Build
+      run: yarn build
+
+    - name: Linting
+      run: yarn lint
+
+    - name: Run unit tests
+      run: yarn test
