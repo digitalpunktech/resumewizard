@@ -1,8 +1,8 @@
-import appLogger from './logging/appLogger.js';
 import fs from 'fs';
 import path from 'path';
 import puppeteer from 'puppeteer';
 import handlebars from 'handlebars';
+import appLogger from './logging/appLogger.js';
 
 async function createPDF(data) {
   const templateHtml = fs.readFileSync(
