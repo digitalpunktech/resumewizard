@@ -1,7 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const puppeteer = require('puppeteer');
-const handlebars = require('handlebars');
+import appLogger from './logging/appLogger.js';
+import fs from 'fs';
+import path from 'path';
+import puppeteer from 'puppeteer';
+import handlebars from 'handlebars';
 
 async function createPDF(data) {
   const templateHtml = fs.readFileSync(
@@ -41,7 +42,7 @@ async function createPDF(data) {
     await page.pdf(options);
     await browser.close();
   } catch (err) {
-    console.log(err);
+    appLogger.error({ message: err, error: err });
   }
 }
 
