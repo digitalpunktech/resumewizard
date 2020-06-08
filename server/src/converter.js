@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import puppeteer from 'puppeteer';
-import handlebars from 'handlebars';
-import appLogger from './logging/appLogger.js';
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer');
+const handlebars = require('handlebars');
 
 async function createPDF(data) {
   const templateHtml = fs.readFileSync(
@@ -27,23 +26,19 @@ async function createPDF(data) {
     path: pdfPath,
   };
 
-  try {
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox'],
-      headless: true,
-    });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox'],
+    headless: true,
+  });
 
-    const page = await browser.newPage();
+  const page = await browser.newPage();
 
-    await page.setContent(`${html}`, {
-      waitUntil: 'networkidle0',
-    });
+  await page.setContent(`${html}`, {
+    waitUntil: 'networkidle0',
+  });
 
-    await page.pdf(options);
-    await browser.close();
-  } catch (err) {
-    appLogger.error({ message: err, error: err });
-  }
+  await page.pdf(options);
+  await browser.close();
 }
 
 // pull data from db for the template
