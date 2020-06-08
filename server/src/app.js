@@ -7,10 +7,14 @@ import getCorsOptions from './cors/getCorsOptions';
 // Middlewares
 import errorHandlerMiddleware from './middleware/errorHandler';
 import requestLoggingMiddleware from './middleware/requestLogging';
+import { initDBConnection } from './utils/database';
 
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
+
+// Set up mongodb connection with mongoose
+initDBConnection();
 
 const corsOptions = getCorsOptions(process.env.NODE_ENV);
 app.use(cors(corsOptions));
