@@ -20,6 +20,12 @@ node_modules/
 # Optional npm cache directory
 .npm
 
+# history dir
+.history
+
+# build dir
+build/
+
 # Optional eslint cache
 .eslintcache
 

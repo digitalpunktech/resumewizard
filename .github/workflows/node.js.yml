@@ -46,7 +46,7 @@ jobs:
           ${{ runner.os }}-
 
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: yarn --pure-lockfile
 
     - name: Build
       run: yarn build

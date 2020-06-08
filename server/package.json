@@ -19,7 +19,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
-    "mongoose": "^5.9.18"
+    "mongoose": "^5.9.18",
+    "puppeteer": "^3.3.0",
+    "handlebars": "^4.7.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
