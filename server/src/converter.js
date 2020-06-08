@@ -53,8 +53,7 @@ const data = {
   age: 39,
   birthdate: '01/04/1981',
   course: 'Computer Science',
-  summary:
-    'Summary of what I have done so far',
+  summary: 'Summary of what I have done so far',
 };
 
 createPDF(data);
