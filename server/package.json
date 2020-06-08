@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Server for the best Resume Wizard app ever",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "NODE_ENV=${NODE_ENV:-dev} nodemon --ext js,json --exec 'babel-node src/express.js'",
     "start:web": "node build/express.js",
